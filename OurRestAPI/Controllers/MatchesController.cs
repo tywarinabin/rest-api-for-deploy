@@ -39,5 +39,11 @@ namespace OurRestAPI.Controllers
         };
             return Ok( footballPlayers);
         }
+
+        [HttpGet("env/{key}")]
+        public IActionResult FindVariable(string key)
+        {
+            return Ok(new { success = Environment.GetEnvironmentVariable(key) == null ? false : true, message = Environment.GetEnvironmentVariable(key)??"N/A" });
+        }
     }
 }
