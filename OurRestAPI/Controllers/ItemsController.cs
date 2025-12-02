@@ -44,6 +44,10 @@ namespace OurRestAPI.Controllers
         {
             if (newItem == null || string.IsNullOrWhiteSpace(newItem.Name))
                 return BadRequest(new { message = "Invalid item data" });
+            if (items.Contains(newItem))
+            {
+                return Ok(new { message = "Item already exists" });
+            }
 
             newItem.Id = items.Count > 0 ? items.Max(i => i.Id) + 1 : 1;
             items.Add(newItem);
